@@ -1,0 +1,5 @@
+README.mdown
+lib/**/*.rb
+bin/*
+features/**/*.feature
+LICENSE
