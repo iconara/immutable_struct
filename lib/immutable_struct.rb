@@ -1,4 +1,6 @@
 class ImmutableStruct
+  VERSION = '1.0.0'
+  
   def self.new(*attrs)
     struct = Struct.new(*attrs)
     make_immutable!(struct)

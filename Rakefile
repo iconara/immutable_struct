@@ -1,7 +1,9 @@
 require 'rubygems'
 require 'rake'
 
+
 begin
+  require 'lib/immutable_struct'
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = 'immutable_struct'
@@ -12,6 +14,7 @@ begin
     gem.authors = ['Theo Hultberg']
     gem.add_development_dependency 'rspec', '>= 1.2.9'
     gem.add_development_dependency 'yard', '>= 0'
+    gem.version = ImmutableStruct::VERSION
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
