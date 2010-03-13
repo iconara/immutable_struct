@@ -23,9 +23,9 @@ private
 
       def initialize(*attrs)
         if attrs && attrs.size == 1 && attrs.first.is_a?(Hash)
-          super(*members.map { |m| attrs.first[m.to_sym] })
+          struct_initialize(*members.map { |m| attrs.first[m.to_sym] })
         else
-          super
+          struct_initialize(*attrs)
         end
       end
     end
