@@ -1,0 +1,20 @@
+# ImmutableStruct
+
+An immutable implementation of Ruby's `Struct` class. It works just as Struct, but there are no setters, and you can't use `[]=`.
+
+    class Spaceship < ImmutableStruct.new(:name, :max_speed)
+    end
+    
+    ship = Spaceship.new('Enterprise', 'Warp 9')
+
+    puts ship.max_speed # => Warp 9
+    
+    ship.max_speed = '299792458 m/s' # raises NoMethodError
+    
+In addition to the above, `ImmutableStruct` enhances the constructor to accept a hash (but as you can see above the `Struct` behaviour works too):
+
+    ship = Spaceship.new(:max_speed => '∞', :name => 'The TARDIS')
+    
+    puts ship.max_speed # => ∞
+    
+I'm surprised every time I look at the RDoc for `Struct` that it doesn't do this.
