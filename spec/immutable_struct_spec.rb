@@ -38,4 +38,10 @@ describe ImmutableStruct do
     obj.b.should == 2
   end
   
+  it 'adds #to_h that returns a hash representation of the object' do
+    obj = ImmutableItem.new(:a => 1, :b => 2)
+    obj.to_h.should have_key(:a)
+    obj.to_h.should have_key(:b)
+  end
+  
 end

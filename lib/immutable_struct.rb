@@ -28,6 +28,13 @@ private
           struct_initialize(*attrs)
         end
       end
+      
+      def to_h
+        members.inject({}) do |h, m|
+          h[m.to_sym] = self[m]
+          h
+        end
+      end
     end
   end
 end
