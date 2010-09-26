@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ImmutableStruct
   VERSION = '1.0.2'
   
