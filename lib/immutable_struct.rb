@@ -1,5 +1,5 @@
 class ImmutableStruct
-  VERSION = '1.0.1'
+  VERSION = '1.0.2'
   
   def self.new(*attrs)
     struct = Struct.new(*attrs)
