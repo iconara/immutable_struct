@@ -44,4 +44,10 @@ describe ImmutableStruct do
     obj.to_h.should have_key(:b)
   end
   
+  it 'extends #dup so that properties can be overridden' do
+    obj1 = ImmutableItem.new(:a => 1, :b => 2)
+    obj2 = obj1.dup(:b => 3)
+    obj2.b.should == 3
+  end
+  
 end

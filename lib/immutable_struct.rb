@@ -5,6 +5,7 @@ class ImmutableStruct
     struct = Struct.new(*attrs)
     make_immutable!(struct)
     optionalize_constructor!(struct)
+    extend_dup!(struct)
     struct
   end
   
@@ -34,6 +35,14 @@ private
           h[m.to_sym] = self[m]
           h
         end
+      end
+    end
+  end
+  
+  def self.extend_dup!(struct)
+    struct.class_eval do
+      def dup(overrides={})
+        self.class.new(to_h.merge(overrides))
       end
     end
   end
