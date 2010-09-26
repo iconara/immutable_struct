@@ -1,28 +1,15 @@
-require 'rubygems'
-require 'rake'
+# encoding: utf-8
 
+$: << File.expand_path('../lib/', __FILE__)
 
-begin
-  require 'lib/immutable_struct'
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = 'immutable_struct'
-    gem.summary = %Q{An immutable version of Ruby's Struct class}
-    gem.description = %Q{An immutable implementation of Ruby's `Struct` class. It works just as Struct, but there are no setters, and you can't use `[]=`. As a bonus feature the constructor of classes inheriting from ImmutableStruct can take named parameters in the form of a hash.}
-    gem.email = 'theo@iconara.net'
-    gem.homepage = 'http://github.com/iconara/immutable_struct'
-    gem.authors = ['Theo Hultberg']
-    gem.add_development_dependency 'rspec', '>= 1.2.9'
-    gem.add_development_dependency 'yard', '>= 0'
-    gem.version = ImmutableStruct::VERSION
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts 'Jeweler (or a dependency) not available. Install it with: gem install jeweler'
-end
-
+require 'yard'
 require 'spec/rake/spectask'
+require 'immutable_struct'
+
+
+task :default => :spec
+
+
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'
   spec.spec_files = FileList['spec/**/*_spec.rb']
@@ -34,15 +21,12 @@ Spec::Rake::SpecTask.new(:rcov) do |spec|
   spec.rcov = true
 end
 
-task :spec => :check_dependencies
+YARD::Rake::YardocTask.new(:doc)
 
-task :default => :spec
-
-begin
-  require 'yard'
-  YARD::Rake::YardocTask.new
-rescue LoadError
-  task :yardoc do
-    abort 'YARD is not available. In order to run yardoc, you must: sudo gem install yard'
-  end
+task :build do
+  system 'gem build immutable_struct.gemspec'
+end
+ 
+task :release => :build do
+  system "gem push immutable_struct-#{ImmutableStruct::VERSION}"
 end
