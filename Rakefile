@@ -2,28 +2,19 @@
 
 $: << File.expand_path('../lib/', __FILE__)
 
+require 'bundler/setup'
 require 'yard'
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 require 'immutable_struct'
 
 
+RSpec::Core::RakeTask.new(:spec)
+
 task :default => :spec
-
-
-Spec::Rake::SpecTask.new(:spec) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.spec_files = FileList['spec/**/*_spec.rb']
-end
-
-Spec::Rake::SpecTask.new(:rcov) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.pattern = 'spec/**/*_spec.rb'
-  spec.rcov = true
-end
 
 YARD::Rake::YardocTask.new(:doc)
 
-task :build do
+task :build => :spec do
   system 'gem build immutable_struct.gemspec'
 end
  
