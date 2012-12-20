@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    immutable_struct (1.0.2)
+    immutable_struct (1.1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -22,5 +22,5 @@ PLATFORMS
 
 DEPENDENCIES
   immutable_struct!
-  rspec (>= 1.2.9)
+  rspec
   yard
