@@ -28,5 +28,5 @@ task :build do
 end
  
 task :release => :build do
-  system "gem push immutable_struct-#{ImmutableStruct::VERSION}"
+  system "gem push immutable_struct-#{ImmutableStruct::VERSION}.gem"
 end
