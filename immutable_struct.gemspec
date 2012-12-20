@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.name        = 'immutable_struct'
   s.version     = ImmutableStruct::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Theo Hultberg']
+  s.authors     = ["Theo Hultberg", "Ben Cates"]
   s.email       = ['theo@iconara.net']
   s.homepage    = "http://github.com/iconara/immutable_struct"
   s.summary     = %(A version of Ruby's Struct class that creates classes whose instances are immutable)
