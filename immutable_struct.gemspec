@@ -5,10 +5,10 @@
 
 Gem::Specification.new do |s|
   s.name = %q{immutable_struct}
-  s.version = "1.0.2"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Theo Hultberg"]
+  s.authors = ["Theo Hultberg", "Ben Cates"]
   s.date = %q{2010-09-26}
   s.description = %q{An immutable implementation of Ruby's `Struct` class. It works just as Struct, but there are no setters, and you can't use `[]=`. As a bonus feature the constructor of classes inheriting from ImmutableStruct can take named parameters in the form of a hash.}
   s.email = %q{theo@iconara.net}
