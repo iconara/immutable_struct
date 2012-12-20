@@ -1,8 +1,8 @@
 class ImmutableStruct
   VERSION = '1.0.2'
   
-  def self.new(*attrs)
-    struct = Struct.new(*attrs)
+  def self.new(*attrs, &block)
+    struct = Struct.new(*attrs, &block)
     make_immutable!(struct)
     optionalize_constructor!(struct)
     extend_dup!(struct)

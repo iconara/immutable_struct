@@ -3,10 +3,21 @@ require './spec/spec_helper'
 describe ImmutableStruct do
   
   class ImmutableItem < ImmutableStruct.new(:a, :b); end
+
+  ImmutableAdder = ImmutableStruct.new(:a, :b) do
+    def sum
+      a + b
+    end
+  end
   
   it 'can be used as a superclass just like Struct' do
     obj = ImmutableItem.new(1, 2)
     obj.a.should == 1
+  end
+
+  it 'accepts a block as a class body just like Struct' do
+    obj = ImmutableAdder.new(1, 2)
+    obj.sum.should == 3
   end
   
   it 'creates no setters' do
