@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class ImmutableStruct
-  VERSION = '1.1.0'
+  VERSION = '1.1.1'
   
   def self.new(*attrs, &block)
     struct = Struct.new(*attrs, &block)
