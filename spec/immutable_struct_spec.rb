@@ -51,6 +51,11 @@ describe ImmutableStruct do
     obj.b.should == 2
   end
   
+  it 'does not create a hash constructor for single-field instances' do
+    obj = ImmutableStruct.new(:a).new(:some => :data)
+    obj.a.should == {:some => :data}
+  end
+  
   it 'adds #to_h that returns a hash representation of the object' do
     obj = ImmutableItem.new(:a => 1, :b => 2)
     obj.to_h.should have_key(:a)
