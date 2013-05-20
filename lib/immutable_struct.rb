@@ -25,7 +25,7 @@ private
       alias_method :struct_initialize, :initialize
 
       def initialize(*attrs)
-        if attrs && attrs.size == 1 && attrs.first.is_a?(Hash)
+        if members.size > 1 && attrs && attrs.size == 1 && attrs.first.instance_of?(Hash)
           struct_initialize(*members.map { |m| attrs.first[m.to_sym] })
         else
           struct_initialize(*attrs)
