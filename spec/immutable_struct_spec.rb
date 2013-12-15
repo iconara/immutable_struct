@@ -50,7 +50,19 @@ describe ImmutableStruct do
     obj.a.should == nil
     obj.b.should == 2
   end
-  
+
+  it 'creates a constructor that throws an exception on unknown keyword argument' do
+    running {
+      ImmutableItem.new(:a => 1, :b => 2, :c => 3)
+    }.should raise_error(ArgumentError, "unknown keyword: c")
+  end
+
+  it 'creates a constructor that includes detailed error message on multiple unknown keyword arguments' do
+    running {
+      ImmutableItem.new(:a => 1, :b => 2, :foo => 3, :bar => 4, :baz => 5)
+    }.should raise_error(ArgumentError, "unknown keywords: foo, bar, baz")
+  end
+
   it 'does not create a hash constructor for single-field instances' do
     obj = ImmutableStruct.new(:a).new(:some => :data)
     obj.a.should == {:some => :data}

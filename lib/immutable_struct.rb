@@ -26,7 +26,13 @@ private
 
       def initialize(*attrs)
         if members.size > 1 && attrs && attrs.size == 1 && attrs.first.instance_of?(Hash)
-          struct_initialize(*members.map { |m| attrs.first[m.to_sym] })
+          kws = attrs.first
+          extra = kws.keys - members
+          if extra.empty?
+            struct_initialize(*members.map { |m| kws[m] })
+          else
+            raise ArgumentError.new("unknown #{extra.size == 1 ? "keyword" : "keywords"}: #{extra.join(", ")}")
+          end
         else
           struct_initialize(*attrs)
         end
