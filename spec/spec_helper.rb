@@ -9,5 +9,5 @@ require 'yaml'
 alias :running :lambda
 
 RSpec.configure do |config|
-
+  
 end
