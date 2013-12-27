@@ -16,11 +16,7 @@ private
   def self.make_immutable!(struct)
     struct.send(:undef_method, "[]=".to_sym)
     struct.members.each do |member|
-      original_setter = "#{member}=".to_sym
-      private_setter  = "_#{member}=".to_sym
-      struct.send(:alias_method, private_setter, original_setter)
-      struct.send(:private, private_setter)
-      struct.send(:undef_method, original_setter)
+      struct.send(:undef_method, "#{member}=".to_sym)
     end
   end
   
@@ -50,9 +46,7 @@ private
       end
 
       def init_with(coder)
-        coder.map.each do |k, v|
-          send("_#{k}=", v)
-        end
+        struct_initialize(*members.map { |m| coder.map[m.to_s] })
       end
 
     end
