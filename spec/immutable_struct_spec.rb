@@ -68,4 +68,15 @@ describe ImmutableStruct do
     obj2.b.should == 3
   end
   
+  describe '.from_hash' do
+    it 'creates a struct with the given properties' do
+      obj = ImmutableStruct.from_hash(:a => 1)
+      obj.a.should eq(1)
+    end
+
+    it 'does not allow access to other properties' do
+      obj = ImmutableStruct.from_hash(:a => 1)
+      expect { obj.b }.to raise_error(NoMethodError)
+    end
+  end
 end

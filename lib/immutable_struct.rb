@@ -11,6 +11,11 @@ class ImmutableStruct
     struct
   end
   
+  def self.from_hash(data)
+    ImmutableStruct.
+      new(*data.keys).
+      new(*data.keys.map { |key| data[key] })
+  end
 private
 
   def self.make_immutable!(struct)
