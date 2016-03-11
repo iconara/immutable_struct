@@ -50,6 +50,12 @@ describe ImmutableStruct do
     obj.a.should == nil
     obj.b.should == 2
   end
+
+  it 'creates a strict constructor that needs all fields' do
+    StrictImmutableItem = ImmutableItem.strict
+    lambda { StrictImmutableItem.new(:b => 2) }.should raise_error(ArgumentError)
+    lambda { ImmutableItem.new(:b => 2) }.should_not raise_error(ArgumentError)
+  end
   
   it 'does not create a hash constructor for single-field instances' do
     obj = ImmutableStruct.new(:a).new(:some => :data)
