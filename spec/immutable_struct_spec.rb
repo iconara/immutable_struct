@@ -50,6 +50,12 @@ describe ImmutableStruct do
     obj.a.should == nil
     obj.b.should == 2
   end
+
+  it 'creates a strict constructor that needs all fields' do
+    StrictImmutableItem = ImmutableItem.strict
+    lambda { StrictImmutableItem.new(:b => 2) }.should raise_error(ArgumentError)
+    lambda { ImmutableItem.new(:b => 2) }.should_not raise_error(ArgumentError)
+  end
   
   it 'does not create a hash constructor for single-field instances' do
     obj = ImmutableStruct.new(:a).new(:some => :data)
@@ -66,6 +72,13 @@ describe ImmutableStruct do
     obj1 = ImmutableItem.new(:a => 1, :b => 2)
     obj2 = obj1.dup(:b => 3)
     obj2.b.should == 3
+  end
+  
+  it "can be deserialized from YAML" do
+    obj1 = ImmutableItem.new(:a => 1, :b => 2)
+    yaml = YAML.dump(obj1)
+    obj2 = YAML.load(yaml)
+    obj2.should == obj1
   end
   
 end

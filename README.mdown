@@ -16,5 +16,12 @@ In addition to the above, `ImmutableStruct` enhances the constructor to accept a
     ship = Spaceship.new(:max_speed => '∞', :name => 'The TARDIS')
     
     puts ship.max_speed # => ∞
+
+You can create a strict version of the struct, which will raise an error if you initialize it with a Hash that does not contain all the fields
+of the struct
+
+    StrictSpaceship = Spaceship.strict
+
+    strict_ship = StrictSpaceship.new(:name => 'Enterprise') # raises ArgumentError
     
 I'm surprised every time I look at the RDoc for `Struct` that it doesn't do this.
